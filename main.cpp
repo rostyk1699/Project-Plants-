@@ -39,6 +39,16 @@ public:
         cout << "Color: " << color << endl;
     }
 };
+class Tree : public Plant {
+private:
+    double trunkDiameter;
+public:
+    Tree(const string &name, const string &species, int age, double height, double trunkDiameter) : Plant(name, species, age, height), trunkDiameter(trunkDiameter){}
+    void displayInfo() const override {
+        Plant::displayInfo();
+        cout << "Trunk Diameter: " << trunkDiameter << " cm" << endl;
+    }
+};
 
 class PlantManager {
 private:
