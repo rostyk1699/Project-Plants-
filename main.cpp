@@ -92,10 +92,11 @@ int main() {
         cin >> choice;
 
         if (choice == 1) {
-            string name, species;
+            string name, species, type;
             int age;
             double height;
-
+            cout << "Enter plant type (Flower/Tree): ";
+            cin >> type;
             cout << "Enter plant name: ";
             cin >> name;
             cout << "Enter plant species: ";
@@ -105,26 +106,33 @@ int main() {
             cout << "Enter plant height (cm): ";
             cin >> height;
 
-            Plant newPlant(name, species, age, height);
-            manager.addPlant(newPlant);
-
+            if (type == "Flower") {
+                string color;
+                cout << "Enter flower color: ";
+                cin >> color;
+                manager.addPlant(new Flower(name, species, age, height, color));
+            } else if (type == "Tree") {
+                double trunkDiameter;
+                cout << "Enter tree trunk diameter (cm): ";
+                cin >> trunkDiameter;
+                manager.addPlant(new Tree(name, species, age, height, trunkDiameter));
+            } else {
+                cout << "Invalid plant type. Please enter either 'Flower' or 'Tree'." << endl;
+            }
         } else if (choice == 2) {
             manager.displayAllPlants();
-
         } else if (choice == 3) {
             string name;
             cout << "Enter plant name to search: ";
             cin >> name;
             manager.searchPlantByName(name);
-
         } else if (choice == 4) {
             break;
-
         } else {
             cout << "Invalid choice. Please try again." << endl;
         }
     }
-
     return 0;
 }
+
 
