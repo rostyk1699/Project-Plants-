@@ -52,22 +52,27 @@ public:
 
 class PlantManager {
 private:
-    vector<Plant> plants;
+    vector<Plant*> plants;
+
 public:
-    void addPlant(const Plant &plant) {
+    ~PlantManager() {
+        for (Plant* plant : plants) {
+            delete plant;
+        }
+    }
+    void addPlant(Plant* plant) {
         plants.push_back(plant);
     }
-
     void displayAllPlants() const {
         for (const auto &plant : plants) {
-            plant.displayInfo();
+            plant->displayInfo();
         }
     }
     void searchPlantByName(const string &name) const {
         bool found = false;
         for (const auto &plant : plants) {
-            if (plant.getName() == name) {
-                plant.displayInfo();
+            if (plant->getName() == name) {
+                plant->displayInfo();
                 found = true;
             }
         }
@@ -76,6 +81,7 @@ public:
         }
     }
 };
+
 int main() {
     PlantManager manager;
     int choice;
